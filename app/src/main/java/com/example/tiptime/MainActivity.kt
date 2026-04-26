@@ -108,7 +108,7 @@ fun EditNumberField(
         modifier = modifier
     )
 }
-
+ //no le di al push
 /**
  * Calculates the tip based on the user input and format the tip amount
  * according to the local currency.
