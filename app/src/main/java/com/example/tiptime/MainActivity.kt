@@ -92,12 +92,17 @@ fun TipTimeLayout() {
         Spacer(modifier = Modifier.height(150.dp))
     }
 }
-
+// Aqui abajo se supone tengo que agregar algo
 @Composable
 fun EditNumberField(
     modifier: Modifier = Modifier
 ) {
     var amountInput by remember { mutableStateOf("") }
+
+
+    val amount = amountInput.toDoubleOrNull() ?: 0.0
+    val tip = calculateTip(amount)
+
 
 
     //movi aqui el codigo e hice un debug, se ve el pequeño cambio en la linea 106
