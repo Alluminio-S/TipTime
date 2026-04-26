@@ -93,23 +93,18 @@ fun TipTimeLayout() {
     }
 }
 // Aqui abajo se supone tengo que agregar algo
+// Volver a hacer cambios en EditNumberField
 @Composable
+
+//aqui cambie el como se veian unas cosas en EditNumberField
 fun EditNumberField(
+    value: String,
+    onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var amountInput by remember { mutableStateOf("") }
-
-
-    val amount = amountInput.toDoubleOrNull() ?: 0.0
-    val tip = calculateTip(amount)
-
-
-
-    //movi aqui el codigo e hice un debug, se ve el pequeño cambio en la linea 106
-    // se agregan keyboardOptions y labels
     TextField(
-        value = amountInput,
-        onValueChange = { amountInput = it },
+        value = value,
+        onValueChange = onValueChange,
         singleLine = true,
         label = { Text(stringResource(R.string.bill_amount)) },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
