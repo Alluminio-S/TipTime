@@ -101,6 +101,7 @@ fun EditNumberField(
 
 
     //movi aqui el codigo e hice un debug, se ve el pequeño cambio en la linea 106
+    // se agregan keyboardOptions y labels
     TextField(
         value = amountInput,
         onValueChange = { amountInput = it },
