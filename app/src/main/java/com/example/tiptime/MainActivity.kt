@@ -99,6 +99,8 @@ fun EditNumberField(
 ) {
     var amountInput by remember { mutableStateOf("") }
 
+
+    //movi aqui el codigo e hice un debug, se ve el pequeño cambio en la linea 106
     TextField(
         value = amountInput,
         onValueChange = { amountInput = it },
