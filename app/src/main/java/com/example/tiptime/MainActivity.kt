@@ -36,9 +36,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,6 +67,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TipTimeLayout() {
+    var amountInput by remember { mutableStateOf("") }
+
+    val amount = amountInput.toDoubleOrNull() ?: 0.0
+    val tip = calculateTip(amount)
+
     Column(
         modifier = Modifier
             .statusBarsPadding()
@@ -82,21 +87,22 @@ fun TipTimeLayout() {
                 .padding(bottom = 16.dp, top = 40.dp)
                 .align(alignment = Alignment.Start)
         )
-
         EditNumberField(
+            value = amountInput,
+            onValueChange = { amountInput = it },
             modifier = Modifier
                 .padding(bottom = 32.dp)
                 .fillMaxWidth()
         )
-
+        Text(
+            text = stringResource(R.string.tip_amount, tip),
+            style = MaterialTheme.typography.displaySmall
+        )
         Spacer(modifier = Modifier.height(150.dp))
     }
 }
-// Aqui abajo se supone tengo que agregar algo
-// Volver a hacer cambios en EditNumberField
-@Composable
 
-//aqui cambie el como se veian unas cosas en EditNumberField
+@Composable
 fun EditNumberField(
     value: String,
     onValueChange: (String) -> Unit,
@@ -111,10 +117,11 @@ fun EditNumberField(
         modifier = modifier
     )
 }
- //no le di al push
+
 /**
  * Calculates the tip based on the user input and format the tip amount
  * according to the local currency.
+ * Example would be "$10.00".
  */
 private fun calculateTip(amount: Double, tipPercent: Double = 15.0): String {
     val tip = tipPercent / 100 * amount
